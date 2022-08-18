@@ -136,3 +136,9 @@ puts "\u3042\u3044\u3046"
 #puts "\u41"
 puts "\u0041"
 puts "\u{41}"
+
+#Alice,Bob,Carolと順に検索し、最初に見つかったユーザを変数に格納する
+user = find_user('Alice') || find_user('Bob') || find_user('Carol')
+
+#正常なユーザであればメールを送信する（左辺が偽であればメール送信は実行されない）
+user.vaild? && send_email_to(user)
