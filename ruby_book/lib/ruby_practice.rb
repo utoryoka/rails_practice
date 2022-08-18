@@ -137,8 +137,92 @@ puts "\u3042\u3044\u3046"
 puts "\u0041"
 puts "\u{41}"
 
+#架空のコード例（真偽値が確定した時点で評価が終了されることを活用した架空のコード例）
 #Alice,Bob,Carolと順に検索し、最初に見つかったユーザを変数に格納する
-user = find_user('Alice') || find_user('Bob') || find_user('Carol')
-
+#user = find_user('Alice') || find_user('Bob') || find_user('Carol')
 #正常なユーザであればメールを送信する（左辺が偽であればメール送信は実行されない）
-user.vaild? && send_email_to(user)
+#user.vaild? && send_email_to(user)
+
+a = <<~TEXT
+優先順位
+高い !
+    &&
+    ||
+    not
+低い and or
+TEXT
+
+def greet_2(country)
+    #countryがnil（またはfalse）ならメッセージを返してメソッドを抜ける
+    country or return 'countryを入力してください'
+
+    if country == 'japan'
+        'konitiha'
+    else
+        'hello'
+    end
+end
+
+puts greet_2(nil)
+puts greet_2('japan')
+
+#unless文　falseの場合、実行する
+status ='error'
+if status != 'ok'
+    puts '何か異常があります(if)'
+end
+
+unless status == 'ok'
+    puts '何か異常があります（unless）'
+else
+    puts '正常です'
+end
+
+#直接変数に入れることもできる
+message =
+unless status == 'ok'
+    '何か異常があります(massage)'
+else
+    '正常です'
+end
+
+puts message
+
+#case文
+country ='us'
+
+case country
+when 'japan'
+    puts 'konitiha'
+when 'us'
+    puts 'hello'
+when 'italy'
+    puts 'ciao'
+else
+    puts '???'
+end
+
+#case文(複数条件を指定でき、どれかを満たせば実行する)
+country ='アメリカ'
+
+case country
+when 'japan','日本'
+    puts 'konitiha'
+when 'us','アメリカ'
+    puts 'hello'
+when 'italy','イタリア'
+    puts 'ciao'
+else
+    puts '???'
+end
+
+#条件演算子(三項演算子)
+n = 11
+message = n > 10 ? '10より大きい' : '10以下'
+puts message
+#if文で記述
+if n > 10
+    puts 'n>10'
+else
+    puts 'n<=10'
+end
