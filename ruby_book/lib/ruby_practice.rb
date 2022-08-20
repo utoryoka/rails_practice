@@ -226,3 +226,83 @@ if n > 10
 else
     puts 'n<=10'
 end
+
+def default_args(a,b,c=0,d=0)
+    "a=#{a},b=#{b},c=#{c},d=#{d}"
+end
+puts default_args(1,2)
+puts default_args(1,2,3,4)
+
+#システム日時や他のメソッドの戻り値をデフォルト値に設定する
+def foo(time = Time.now, message = bar)
+    puts "time: #{time},message: #{message}"
+end
+
+def bar
+    'BAR'
+end
+foo
+
+#述語メソッド
+#空文字列であればtrue、そうでなければfalse
+puts ''.empty?
+puts 'abc'.empty?
+
+#引数の文字列が含まれていればtrue,そうでなれけばfalse
+puts 'watch'.include?('at')
+puts 'watch'.include?('in')
+
+a= 'ruBy'
+#upcaseだと変数aの値は変化しない
+puts a.upcase
+puts a
+
+#upcase!だと変数aの値も大文字に変わる
+puts a.upcase!
+puts a
+puts a.downcase
+
+#エンドレスメソッド定義（=に続けて処理や戻り値を書く）
+def greet = 'Hello!'
+def add(a,b) = a + b
+puts greet
+puts add(1,2)
+
+#aとbはどちらも同じ文字列だが、オブジェクトとしては別物
+a = 'hello'
+b = 'hello'
+puts a.object_id
+puts b.object_id
+#cにbを代入する。どちらも同じオブジェクト
+c = b
+puts c.object_id
+#メソッドの引数にcを渡す。引数として受け取ったdはb,cと同じオブジェクトを参照している
+def m(d)
+    d.object_id
+end
+puts m(c)
+
+#equal?メソッドを使って同じオブジェクト化どうか確認してもよい（trueなら同じオブジェクト）
+puts a.equal?(b)
+puts b.equal?(c)
+
+# b,cは同じオブジェクト、aは異なるオブジェクト
+a = 'hello'
+b = 'hello'
+c = b
+
+#渡された文字列を破壊的に大文字に変換するメソッドを定義する。
+def m!(d)
+    d.upcase!
+end
+#cにメソッドを適用する
+m!(c)
+#結果(同じオブジェクトが入っているものは一つ変えたらどちらも変わる)
+puts b
+puts c
+puts a
+
+#外部ライブラリ読み込み
+require 'date'
+puts Date.today
+
